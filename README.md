@@ -20,3 +20,4 @@
           <param-value>classpath:springmvc.xml</param-value>
       </context-param>
  ## springmvc流程
+![springmvc流程](flow.png)
