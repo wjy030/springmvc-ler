@@ -76,10 +76,13 @@
     - Declare Spring context listener which sets up the Spring Application Context
     - containing all Cocoon components (and user defined beans as well).
     -->
-  <!--<listener>-->
-    <!--<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>-->
-  <!--</listener>-->
-
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:springmvc.xml</param-value>
+    </context-param>
   <!--
     - Declare Spring request listener which sets up the required RequestAttributes
     - to support Springs and Cocoon custom bean scopes like the request scope or the

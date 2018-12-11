@@ -10,9 +10,22 @@
  */
 package com.wjy.controller;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
+import com.wjy.model.Pet;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.util.Map;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -25,11 +38,38 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/test")
 public class TestController {
-    @RequestMapping("/first")
+    @RequestMapping(value = "/first",method = RequestMethod.GET,params = {"name"}
+//            headers = {"sessionId"},
+//            consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+//            produces = MediaType.APPLICATION_JSON_UTF8_VALUE
+    )
     public ModelAndView test () {
         System.out.println("***************");
-        ModelAndView modelAndView = new ModelAndView("/WEB-INF/jsp/test.jsp");
+        ModelAndView modelAndView = new ModelAndView("test");
         modelAndView.addObject("name","my test");
         return modelAndView;
     }
+
+    @RequestMapping(value="/second",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    public String second() {
+        return "{\"key\":\"value\"}";
+    }
+
+    @RequestMapping(value="/third",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public String third(@RequestBody String name) {
+        System.out.println(name);
+        return "redirect:http://www.baidu.com";
+    }
+    @RequestMapping(value="/forth",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ModelAndView forth(@RequestBody String name) {
+        System.out.println(name);
+        return new ModelAndView("redirect:http://www.baidu.com");
+    }
+    @RequestMapping(value="/fifth",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public void fifth(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
+        response.sendRedirect("http://www.baidu.com");
+    }
+
+
 }
