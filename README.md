@@ -39,3 +39,4 @@
   ``ModelAndView modelAndView = new ModelAndView("test");``
 ## [RequestMapping,RequestBody,ResponseBody注解](RequestMapping.md)
 ## [springmvc中跳转](redirect.md)
+## [请求参数接收](databinding.md)
