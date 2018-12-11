@@ -36,8 +36,8 @@ import java.util.Map;
  * @since 1.0.0
  */
 @Controller
-@RequestMapping("/test")
-public class TestController {
+@RequestMapping("/dispatch")
+public class DispatchController {
     @RequestMapping(value = "/first",method = RequestMethod.GET,params = {"name"}
 //            headers = {"sessionId"},
 //            consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
