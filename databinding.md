@@ -29,6 +29,10 @@
     private String userName;
     private String password;
     private Role role;
+    
+    public class Role {
+    private String id;
+    private String name;
 javabean中有Object类型属性时，要往其中属性传入请求参数时表单name写法：  
     ``<input type="text" name="role.id">``  
     ``<input type="text" name="role.name">``
