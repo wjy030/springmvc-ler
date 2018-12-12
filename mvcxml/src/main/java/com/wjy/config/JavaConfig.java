@@ -12,6 +12,8 @@ package com.wjy.config;
 
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -22,7 +24,8 @@ import org.springframework.context.annotation.ComponentScan;
  * @since 1.0.0
  */
 @Configurable
-@ComponentScan(basePackages = "com.wjy")
+@ComponentScan(basePackages = "com.wjy",excludeFilters = {@ComponentScan.Filter(type = FilterType.ANNOTATION,value =
+        EnableWebMvc.class)})
 public class JavaConfig {
 
 }

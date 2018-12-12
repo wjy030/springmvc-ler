@@ -11,6 +11,7 @@
 package com.wjy.controller;
 
 import com.wjy.model.User;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -73,7 +74,7 @@ public class DataBindingController {
         return "test";
     }
     @RequestMapping(value = "/con",method = RequestMethod.POST)
-    public String getCon(Date birth) {
+    public String getCon(@DateTimeFormat(pattern = "yyyy-MM-dd") Date birth) {
         System.out.println(birth);
         return "test";
     }
