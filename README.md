@@ -1,3 +1,4 @@
+
 # springmvc学习
 ## 配置文件
 配置文件可以配在servlet中，也可以通过listener配置
@@ -41,3 +42,27 @@
 ## [springmvc中跳转](redirect.md)
 ## [请求参数接收](databinding.md)
 ## [错误处理](exception.md)
+## 文件上传
+### 表单中的配置
+     <form action="/upload/test.action" enctype="multipart/form-data" method="post">
+必须配置enctype="multipart/form-data"和method="post"
+### bean配置
+    @Bean
+    public CommonsMultipartResolver multipartResolver() {
+        CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+        return resolver;
+    }
+配置CommonsMultipartResolver，它的name或id必须是**multipartResolver**，该类中还可以配置文件最允许大小等参数
+### pom.xml配置
+        <dependency>
+          <groupId>commons-fileupload</groupId>
+          <artifactId>commons-fileupload</artifactId>
+          <version>LATEST</version>
+      </dependency>
+### 方法中
+#### 参数
+     public String upload(HttpServletRequest request, String userName, MultipartFile file) {
+使用MultipartFile类型定义文件参数
+#### 执行
+    file.transferTo(new File(request.getSession().getServletContext().getRealPath("/upload")+"/"+file.getOriginalFilename()));
+使用transferTo执行上传
