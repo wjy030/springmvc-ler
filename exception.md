@@ -1,5 +1,5 @@
 # 错误处理
-## @ExceptionHandler注解处理
+## @ExceptionHandler注解处理 优先级高
     @ExceptionHandler(value = ArithmeticException.class)
     public ModelAndView handle(Exception ex) {
         ModelAndView mv = new ModelAndView("error");
@@ -14,7 +14,7 @@
 public class ExceptionController {
 
 
-## SimpleMappingExceptionResolver配置处理
+## SimpleMappingExceptionResolver配置处理 优先级中
     @Bean
     public SimpleMappingExceptionResolver simpleMappingExceptionResolver() {
         SimpleMappingExceptionResolver resolver = new SimpleMappingExceptionResolver();
@@ -25,4 +25,15 @@ public class ExceptionController {
         return resolver;
     }
 配置SimpleMappingExceptionResolver类，setExceptionMappings方法配置Exception和跳转页面的对应，setExceptionAttribute设置在页面中取出exception时
-用的属性名
+用的属性名，默认为exception
+## HandlerExceptionResolver接口处理 优先级低
+        @Component
+        public class ExceptionResolver implements HandlerExceptionResolver {
+            public ModelAndView resolveException(HttpServletRequest httpServletRequest, HttpServletResponse 
+                    httpServletResponse, Object o, Exception e) {
+                ModelAndView mv = new ModelAndView("error2");
+                mv.addObject("ex",e);
+                return mv;
+            }
+        }
+实现HandlerExceptionResolver接口及方法并让其被spring容器管理  
