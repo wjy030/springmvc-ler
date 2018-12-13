@@ -66,3 +66,35 @@
 #### 执行
     file.transferTo(new File(request.getSession().getServletContext().getRealPath("/upload")+"/"+file.getOriginalFilename()));
 使用transferTo执行上传
+## 实现拦截器
+### 实现拦截器接口
+        public class MyInterceptor1 implements HandlerInterceptor {
+
+            public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o
+            ) throws Exception {
+                return true; //返回false则不会执行后续
+            }
+            public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o,
+                                   ModelAndView modelAndView) throws Exception {
+            }
+            public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
+                                        Object o, Exception e) throws Exception {
+            }
+        }
+实现HandlerInterceptor接口，实现preHandle，postHandle，afterCompletion方法  
+### 配置拦截器接口
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new MyInterceptor1()).addPathPatterns("/inter/handle.action");
+    }
+添加拦截器并指定拦截的path为 **/inter/handle.action**  
+添加拦截器的顺序即拦截器执行的顺序
+### 多个拦截器时的整个执行顺序
+假设有两个拦截器interceptor1和interceptor2，先加入的是interceptor1
+* 执行interceptor1的preHandle方法
+* 执行interceptor2的preHandle方法
+* 执行controller的方法
+* 执行interceptor2的postHandle方法
+* 执行interceptor1的postHandle方法
+* 执行interceptor2的afterCompletion方法
+* 执行interceptor1的afterCompletion方法
