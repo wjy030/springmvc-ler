@@ -30,3 +30,11 @@
     </dependency>
 ## ResponseBody注解
 放在方法上，方法返回的数据会放到http响应的body中
+## 例
+    @RequestMapping(value = "/test",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            produces = MediaType.TEXT_PLAIN_VALUE)
+    @ResponseBody
+    public String getJson(@RequestBody User user) {
+        System.out.println(user);
+        return "test";
+    }

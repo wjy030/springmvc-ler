@@ -52,5 +52,10 @@
     <input type="checkbox" name="like" value="3">看书<br>
     <input type="submit" value="提交">
 </form>
+<form action="/upload/test.action" enctype="multipart/form-data" method="post">
+    <input type="text" name="userName">
+    <input type="file" name="file">
+    <input type="submit" value="提交">
+</form>
 </body>
 </html>
