@@ -98,3 +98,18 @@
 * 执行interceptor1的postHandle方法
 * 执行interceptor2的afterCompletion方法
 * 执行interceptor1的afterCompletion方法
+## springmvc对restful支持
+* restful风格中http方法的意义
+* get 查询
+* post 新增
+* put 更新
+* delete 删除
+### form表单中增加参数_method
+      <input type="hidden" name="_method" value="put" />
+### 加入HiddenHttpMethodFilter
+@Override
+    public void onStartup(ServletContext servletContext) throws ServletException {
+        super.onStartup(servletContext);
+        FilterRegistration.Dynamic hiddenMethod = servletContext.addFilter("hiddenMethod", HiddenHttpMethodFilter.class);
+        hiddenMethod.addMappingForServletNames(null,true,getServletName());
+    }
