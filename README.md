@@ -48,7 +48,8 @@
 必须配置enctype="multipart/form-data"和method="post"
 ### bean配置
     @Bean
-    public CommonsMultipartResolver multipartResolver() {
+
+public CommonsMultipartResolver multipartResolver() {
         CommonsMultipartResolver resolver = new CommonsMultipartResolver();
         return resolver;
     }
@@ -57,7 +58,8 @@
         <dependency>
           <groupId>commons-fileupload</groupId>
           <artifactId>commons-fileupload</artifactId>
-          <version>LATEST</version>
+
+<version>LATEST</version>
       </dependency>
 ### 方法中
 #### 参数
@@ -98,6 +100,12 @@
 * 执行interceptor1的postHandle方法
 * 执行interceptor2的afterCompletion方法
 * 执行interceptor1的afterCompletion方法
+## 配置静态资源映射
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/static/**").addResourceLocations("/WEB-INF/static/");
+    }
+    http访问/static/前缀时会去/WEB-INF/static/找对应静态资源
 ## springmvc对restful支持
 * restful风格中http方法的意义
 * get 查询
