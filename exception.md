@@ -9,10 +9,10 @@
 被ExceptionHandler注解的方法可以用来处理本类中抛出的异常，传入Exception参数。  
 如果要使该方法对其他类的也起作用，需要在该方法的类上加上ControllerAdvice注解  
 
-
+```
 @ControllerAdvice
 public class ExceptionController {
-
+```
 
 ## SimpleMappingExceptionResolver配置处理 优先级中
     @Bean
