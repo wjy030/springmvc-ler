@@ -68,6 +68,15 @@ public CommonsMultipartResolver multipartResolver() {
 #### 执行
     file.transferTo(new File(request.getSession().getServletContext().getRealPath("/upload")+"/"+file.getOriginalFilename()));
 使用transferTo执行上传
+## 零配置使用
+```
+@Configuration
+@EnableWebMvc
+@ComponentScan(basePackages = "com.wjy.controller")
+public class WebConfig extends WebMvcConfigurerAdapter {
+```
+web配置类继承WebMvcConfigurerAdapter 可以实现一些xml配置的功能
+比如添加拦截器,配置静态资源等
 ## 实现拦截器
 ### 实现拦截器接口
         public class MyInterceptor1 implements HandlerInterceptor {
