@@ -98,19 +98,21 @@ web配置类继承WebMvcConfigurerAdapter 可以实现一些xml配置的功能
 比如添加拦截器,配置静态资源等
 ## 实现拦截器
 ### 实现拦截器接口
-        public class MyInterceptor1 implements HandlerInterceptor {
+```
+public class MyInterceptor1 implements HandlerInterceptor {
 
-            public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o
-            ) throws Exception {
-                return true; //返回false则不会执行后续
-            }
-            public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o,
-                                   ModelAndView modelAndView) throws Exception {
-            }
-            public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
-                                        Object o, Exception e) throws Exception {
-            }
-        }
+    public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o
+    ) throws Exception {
+        return true; //返回false则不会执行后续
+    }
+    public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o,
+                           ModelAndView modelAndView) throws Exception {
+    }
+    public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
+                                Object o, Exception e) throws Exception {
+    }
+}
+```        
 实现HandlerInterceptor接口，实现preHandle，postHandle，afterCompletion方法  
 ### 配置拦截器接口
     @Override
