@@ -145,6 +145,7 @@ public class MyInterceptor1 implements HandlerInterceptor {
 ### form表单中增加参数_method
       <input type="hidden" name="_method" value="put" />
 ### 加入HiddenHttpMethodFilter
+```
 public class TestInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
@@ -152,6 +153,7 @@ public class TestInitializer extends AbstractAnnotationConfigDispatcherServletIn
         FilterRegistration.Dynamic hiddenMethod = servletContext.addFilter("hiddenMethod", HiddenHttpMethodFilter.class);
         hiddenMethod.addMappingForServletNames(null,true,getServletName());
     }
+```    
 ### controller中指定对应的requestmethod
     @RequestMapping(value = "/update",method = RequestMethod.PUT)
     public String doPut() {
