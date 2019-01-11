@@ -69,6 +69,25 @@ public CommonsMultipartResolver multipartResolver() {
     file.transferTo(new File(request.getSession().getServletContext().getRealPath("/upload")+"/"+file.getOriginalFilename()));
 使用transferTo执行上传
 ## 零配置使用
+### AbstractAnnotationConfigDispatcherServletInitializer
+```
+public class TestInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+
+    protected Class<?>[] getRootConfigClasses() {
+        return new Class[]{JavaConfig.class};
+    }
+
+    protected Class<?>[] getServletConfigClasses() {
+        return new Class[]{WebConfig.class};
+    }
+
+    protected String[] getServletMappings() {
+        return new String[]{"*.action"};
+    }
+}
+```
+实现了servlet3.0的容器启动时会通过该类加载spring容器和web的相关配置,web的filter和listener都可以通过覆写onStartup方法添加
+### WebMvcConfigurerAdapter
 ```
 @Configuration
 @EnableWebMvc
@@ -124,6 +143,7 @@ web配置类继承WebMvcConfigurerAdapter 可以实现一些xml配置的功能
 ### form表单中增加参数_method
       <input type="hidden" name="_method" value="put" />
 ### 加入HiddenHttpMethodFilter
+public class TestInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
         super.onStartup(servletContext);
